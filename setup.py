@@ -4,6 +4,9 @@ from gensim.models import KeyedVectors
 from huggingface_hub import hf_hub_download
 from pathlib import Path
 import os
+import nltk
+from nltk.stem import PorterStemmer
+nltk.download("punkt")
 
 if __name__=="__main__":
     print("setup: check/load model sentence-transformers/all-mpnet-base-v2 (may tak some time and strange messages)")
