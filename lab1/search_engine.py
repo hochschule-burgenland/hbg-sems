@@ -55,7 +55,33 @@ class QueryProcessor:
         return sorted(result, key=lambda qr: qr.weight, reverse=True)        
 
 def extract_normalized_tokens(text:str) -> list[str]:
-    return text.split()
+    from nltk.corpus import stopwords
+    from nltk.tokenize import word_tokenize
+    import nltk    
+
+    stops= stopwords.words("english")
+    puncts=",.:!?-"
+    tok= word_tokenize(text)
+    tok= [w.lower() for w in tok if (w not in stops and w not in puncts)]
+    postok= nltk.pos_tag(tok)
+    tok= [get_lemma(e) for e in postok]
+    return tok
+
+from nltk.stem import WordNetLemmatizer 
+wn= WordNetLemmatizer()
+
+def get_lemma(entry:tuple[str,str]) -> str:
+    pos= entry[1]
+    pos1=None
+    if pos.startswith("J"):
+        pos1="a"
+    elif pos.startswith("N"):
+        pos1="n"
+    elif pos.startswith("V"):
+        pos1="v"
+    elif pos.startswith("R"):
+        pos1="r"   
+    return wn.lemmatize(entry[0],pos1) if pos1 else entry[0]
     
 def initialize_data(documents:list[Document], questions:list[dict]) -> None:
     from csv import DictReader
