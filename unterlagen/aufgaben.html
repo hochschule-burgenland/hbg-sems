@@ -7511,6 +7511,17 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f7a49045">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Datenbeispiele-f%C3%BCr-die-Aufgaben">Datenbeispiele für die Aufgaben<a class="anchor-link" href="#Datenbeispiele-f%C3%BCr-die-Aufgaben">¶</a></h2>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=af0425aa">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -7533,7 +7544,7 @@ Einige Formatierungsparameter sind bei der Erzeugung eines Readers von besondere
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">csv</span><span class="w"> </span><span class="kn">import</span> <span class="n">DictReader</span>
@@ -7595,12 +7606,21 @@ read 6 questions
 <h2 id="Aufgabe-1:-Keyword-Search">Aufgabe 1: Keyword Search<a class="anchor-link" href="#Aufgabe-1:-Keyword-Search">¶</a></h2><p>Für die Schlüsselwortsuche ist Stopword Removal, Lowercasing und Lemmatization essentiell.
 Wir werden die Schlüsselwortsuche in der Folge immer wieder für den Vergleich mit anderen Methoden
 verwenden.</p>
-<h4 id="API">API<a class="anchor-link" href="#API">¶</a></h4><ul>
-<li>Tokenisierung (Zergliederung eines Textes in Wörter)</li>
+<h4 id="API:-Tokenisierung-(Zergliederung-eines-Textes-in-W%C3%B6rter)">API: Tokenisierung (Zergliederung eines Textes in Wörter)<a class="anchor-link" href="#API:-Tokenisierung-(Zergliederung-eines-Textes-in-W%C3%B6rter)">¶</a></h4><ul>
 <li>Synonyme eines Wortes ermitteln</li>
 <li>POS-Tag eines Wortes ermitteln</li>
 <li>Lemma eins Wortes bilden</li>
 </ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f395f132">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 </div>
 </div>
 </div>
@@ -7609,7 +7629,7 @@ verwenden.</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nltk.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">stopwords</span>
@@ -7629,7 +7649,7 @@ verwenden.</p>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>{"mustn't", 'in', 'any', "wouldn't", 'because', 'isn', "we're", 'about', 'over', "weren't", 'through', 'is', 'all', 'weren', 'themselves', "she'll", 'this', "they'll", 'will', 'same', 'more', 'have', 'if', 'won', 'was', 'them', 've', 'yourselves', 'during', 'theirs', 'after', "aren't", "don't", 'he', "it's", "we'd", 'out', "shouldn't", "that'll", 'further', 'both', "she'd", 'a', "we've", 'why', 'when', "he'd", 'haven', 'then', "they've", 'has', "he's", "i'm", 'while', 'most', "i'll", 'nor', "it'll", 'or', 'here', "she's", 'whom', 'hasn', 'm', 'above', 'below', 'needn', 'once', 'how', 'own', 'from', 'having', "i'd", 'than', 'these', "you'd", "you're", 'which', 'against', 'did', 'up', 'under', 'ourselves', 'doing', "couldn't", "it'd", 'but', 'hadn', 'o', 'that', 'been', "doesn't", "they're", 'our', 'him', 'into', 'off', "mightn't", 'can', 'as', 'where', 'those', 'now', 'their', 'i', 'too', 're', 'are', 'had', 'other', 'does', 'again', 'didn', 'of', "they'd", 'just', 'between', 'herself', 'they', 'few', 'and', "haven't", 'to', 'yourself', 'there', 'you', 'mightn', 'not', 'who', "shan't", "needn't", "you've", 'what', 'were', 'on', 'shan', 'hers', 'yours', 'myself', 'at', 'don', 'your', 'for', 'couldn', 'each', "i've", 'by', 'such', 'be', 'my', 'the', 'down', 'his', 'its', "he'll", "isn't", "we'll", 'an', 's', 'itself', "won't", 'am', 'shouldn', 'himself', 'aren', 'doesn', 'her', 'd', 'some', 'wouldn', 'do', 'until', "hadn't", 'mustn', 'it', "you'll", 'wasn', "hasn't", 'before', "didn't", 'ain', 'only', 'should', 'very', 'y', 't', 'ma', 'she', 'with', "wasn't", 'we', 'so', 'll', "should've", 'ours', 'being', 'no', 'me'}
+<pre>{'down', 'o', 'so', 'how', 'under', 'ma', 'mightn', 'had', 'theirs', 'those', 'than', 'can', 'against', 'or', "haven't", "we've", 'i', 'themselves', 'we', 'doing', 'what', "don't", 'some', 'am', "hadn't", 'for', 'out', "shan't", 'again', 'haven', 'that', 'by', 'has', 'hers', "we'll", "they're", 'once', 'but', 'couldn', 'here', "they'd", 'wasn', "you'd", 'aren', 'do', 'm', 'yours', 'my', 'myself', 'same', 'until', 'whom', 't', 'needn', 'y', 'these', 'you', "it'd", 'if', 'his', 'be', "i'll", "needn't", 'herself', 'and', 'just', 'an', 'few', 'have', "isn't", 'he', "they'll", "you've", 'wouldn', 'about', 'himself', "weren't", 'did', 'who', "aren't", 'hasn', "he'd", "he'll", 'it', 'this', 're', 'through', "wasn't", 'itself', "it'll", 'the', "doesn't", 've', "it's", 'd', "you'll", "i'm", "mightn't", 'not', 'now', 'such', "we're", "they've", 'is', "mustn't", 'yourself', 'more', "she'll", 'other', 'then', 'won', "won't", 'at', 'your', 'our', 'up', 'were', 'will', 'was', "wouldn't", 'during', "he's", 'while', 'him', 'ours', 'does', 'their', 'when', 'shan', 'to', 'in', 'both', "should've", 'all', 'hadn', 'own', 'its', 'any', 'ourselves', 'between', 'doesn', 'before', 'of', "she's", 'from', 'they', 'shouldn', 'been', 'are', 'should', 'no', 'yourselves', "couldn't", 'nor', 'where', 'isn', 'ain', "i've", 'there', 'me', 'after', 'above', 'she', 'll', 'because', 'most', 'off', 'why', 'with', "that'll", 'mustn', 'didn', 'them', 'being', "we'd", "didn't", "hasn't", 'having', 'her', 'weren', "shouldn't", 'too', 'which', 'on', 'as', 'very', 'each', 'only', 'over', 'below', 'a', "i'd", 's', "you're", 'don', 'further', 'into', "she'd"}
 Help on function word_tokenize in module nltk.tokenize:
 
 word_tokenize(text, language='english', preserve_line=False)
@@ -7651,44 +7671,12 @@ word_tokenize(text, language='english', preserve_line=False)
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=c05f74a9">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nltk.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">wordnet</span> <span class="k">as</span> <span class="n">wn</span>
-<span class="n">help</span> <span class="p">(</span><span class="n">wn</span><span class="o">.</span><span class="n">synonyms</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Help on method synonyms in module nltk.corpus.reader.wordnet:
-
-synonyms(word, lang='eng') method of nltk.corpus.reader.wordnet.WordNetCorpusReader instance
-    return nested list with the synonyms of the different senses of word in the given language
-
-</pre>
-</div>
-</div>
-</div>
-</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=761b3c3d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">nltk</span>
@@ -7880,7 +7868,7 @@ WRB: Wh-adverb
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nltk.stem</span><span class="w"> </span><span class="kn">import</span> <span class="n">WordNetLemmatizer</span>
