@@ -4,32 +4,59 @@ class Document:
         self.id=id
         self.title=title
         self.text=text
+        self.normalized_text=None        
 
     def __repr__(self) ->str:
-        return f"Document(id={self.id} title={self.title})"    
+        return f"Document(id={self.id} text={self.text})"    
+
+class QueryResult:
+
+    def __init__(self, doc:Document, hit:str):
+        self.document=doc
+        self.hitlist=hit
+        self.weight=1
+
+    def add_hit(self, hit:str):
+        self.hitlist+= " "+hit
+        self.weight+=1    
+
+    def __repr__(self) -> str:
+        return f"weight={self.weight}, docid={self.document.id}, hits={self.hitlist}, text={self.document.text}"
 
 class DocumentIndex:
 
     def __init__(self):
-        pass
+        self.index=[]
 
     def add_to_index(self,doc:Document) -> None:
-        pass
+        doc.normalized_text= " ".join(extract_normalized_tokens(doc.text))
+        self.index.append(doc)
 
     def find_token(self,token:str) -> list[Document]:
-        pass
+        result= [doc for doc in self.index if token in doc.normalized_text]        
+        return result
 
 class QueryProcessor:
 
     def __init__(self, index:DocumentIndex):
         self.index=index
 
-    def query(self,query:str) -> list[Document]:    
-        pass
+    def query(self,query:str) -> list[QueryResult]:    
+        tokens= extract_normalized_tokens(query)
+        result=[]
+        for token in tokens:
+            docs= index.find_token(token)            
+            for doc in docs:      
+                lst= list(filter(lambda qr: qr.document==doc, result))
+                if lst:
+                    lst[0].add_hit(token)
+                else:
+                    result.append(QueryResult(doc,token))    
+        return sorted(result, key=lambda qr: qr.weight, reverse=True)        
 
 def extract_normalized_tokens(text:str) -> list[str]:
+    return text.split()
     
-
 def initialize_data(documents:list[Document], questions:list[dict]) -> None:
     from csv import DictReader
     doc_lines= [
@@ -48,7 +75,7 @@ def initialize_data(documents:list[Document], questions:list[dict]) -> None:
     documents.extend(list(DictReader(doc_lines, delimiter=';', skipinitialspace=True)))
 
     question_lines =[
-    "question;doc;method"
+    "question;doc;method",
     "tell me the oldest song title;1;keyword-search",
     "what was the first vocal ever sung;1;synonyms",
     "can animals make music;9;meronyms",
@@ -74,4 +101,6 @@ if __name__ == "__main__":
     for q in queries:
         result= query_processor.query(q["question"])
         #result=[Document(**doc) for doc in documents[0:2]]
-        print(f"QUERY={q["question"]}, RESULT={result}")
+        print(f"QUERY={q["question"]}")
+        for qr in result[0:2]:
+            print(f"\t{qr}")
