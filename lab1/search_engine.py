@@ -87,14 +87,12 @@ wn= WordNetLemmatizer()
 def get_lemma(entry:tuple[str,str]) -> str:
     pos= entry[1]
     pos1=None
-    if pos.startswith("J"):
+    if pos.startswith("J") or pos.startswith("R"):
         pos1="a"
     elif pos.startswith("N"):
         pos1="n"
     elif pos.startswith("V"):
         pos1="v"
-    elif pos.startswith("R"):
-        pos1="r"   
     return wn.lemmatize(entry[0],pos1) if pos1 else entry[0]
 
 def initialize_data(documents:list[Document], questions:list[dict]) -> None:
