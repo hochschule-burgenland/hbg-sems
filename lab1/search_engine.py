@@ -4,7 +4,7 @@ class Document:
         self.id=id
         self.title=title
         self.text=text
-        self.normalized_text=None        
+        self.normalized_tokens=[]
 
     def __repr__(self) ->str:
         return f"Document(id={self.id} text={self.text})"    
@@ -29,11 +29,11 @@ class DocumentIndex:
         self.index=[]
 
     def add_to_index(self,doc:Document) -> None:
-        doc.normalized_text= " ".join(extract_normalized_tokens(doc.text))
+        doc.normalized_tokens= (extract_normalized_tokens(doc.text))
         self.index.append(doc)
 
     def find_token(self,token:str) -> list[Document]:
-        result= [doc for doc in self.index if token in doc.normalized_text]        
+        result= [doc for doc in self.index if token in doc.normalized_tokens]        
         return result
 
 class QueryProcessor:
@@ -102,7 +102,7 @@ def initialize_data(documents:list[Document], questions:list[dict]) -> None:
 
     question_lines =[
     "question;doc;method",
-    "tell me the oldest song title;1;keyword-search",
+    "what are very old songs;1;keyword-search",
     "what was the first vocal ever sung;1;synonyms",
     "can animals make music;9;meronyms",
     "what was the first song;1;word-vector-search",
