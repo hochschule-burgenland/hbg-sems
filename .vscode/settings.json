@@ -2,7 +2,7 @@
     "python.testing.unittestArgs": [
         "-v",
         "-s",
-        "./simple_search",
+        "./sem_search",
         "-p",
         "*test.py"
     ],
