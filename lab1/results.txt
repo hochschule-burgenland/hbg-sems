@@ -1,0 +1,44 @@
+Before Solution to Lab1
+QUERY=what are very old songs
+QUERY=what was the first vocal ever sung
+        weight=2, docid=3, hits=the first, text=Wolfgang Amadeus Mozart composed his first piece of music at the age of five.
+        weight=1, docid=1, hits=the, text=The oldest known song is the Hurrian Hymn No. 6, which dates back to around 1400 BCE.
+QUERY=can animals make music
+        weight=2, docid=5, hits=can music, text=Listening to music can stimulate the brain and improve memory, mood, and cognitive function.
+        weight=2, docid=10, hits=can music, text=A team of five people can form a band and create music as a quintet.
+QUERY=what was the first song
+        weight=2, docid=1, hits=the song, text=The oldest known song is the Hurrian Hymn No. 6, which dates back to around 1400 BCE.
+        weight=2, docid=3, hits=the first, text=Wolfgang Amadeus Mozart composed his first piece of music at the age of five.
+QUERY=can music bring me back to an active life
+        weight=3, docid=5, hits=can music to, text=Listening to music can stimulate the brain and improve memory, mood, and cognitive function.
+        weight=2, docid=6, hits=can to, text=Music is often referred to as a universal language because it can convey emotions and stories without words.
+QUERY=can a five years old make music
+        weight=4, docid=10, hits=can a five music, text=A team of five people can form a band and create music as a quintet.
+        weight=2, docid=5, hits=can music, text=Listening to music can stimulate the brain and improve memory, mood, and cognitive function.
+QUERY=is there music about animals
+        weight=1, docid=1, hits=is, text=The oldest known song is the Hurrian Hymn No. 6, which dates back to around 1400 BCE.
+        weight=1, docid=2, hits=is, text=The iconic song Bohemian Rhapsody, released in 1975, is known for its unique structure and lack of a traditional chorus.   
+        
+After solution to lab1
+QUERY=what are very old songs
+        weight=2, docid=1, hits=old song, text=The oldest known song is the Hurrian Hymn No. 6, which dates back to around 1400 BCE.
+        weight=1, docid=2, hits=song, text=The iconic song Bohemian Rhapsody, released in 1975, is known for its unique structure and lack of a traditional chorus. 
+QUERY=what was the first vocal ever sung
+        weight=1, docid=3, hits=first, text=Wolfgang Amadeus Mozart composed his first piece of music at the age of five.
+        weight=1, docid=7, hits=ever, text=The largest orchestra ever assembled consisted of 8,097 musicians and performed in Frankfurt, Germany, in 2019.
+QUERY=can animals make music
+        weight=1, docid=3, hits=music, text=Wolfgang Amadeus Mozart composed his first piece of music at the age of five.
+        weight=1, docid=5, hits=music, text=Listening to music can stimulate the brain and improve memory, mood, and cognitive function.
+QUERY=what was the first song
+        weight=1, docid=3, hits=first, text=Wolfgang Amadeus Mozart composed his first piece of music at the age of five.
+        weight=1, docid=1, hits=song, text=The oldest known song is the Hurrian Hymn No. 6, which dates back to around 1400 BCE.
+QUERY=can music bring me back to an active life
+        weight=1, docid=3, hits=music, text=Wolfgang Amadeus Mozart composed his first piece of music at the age of five.
+        weight=1, docid=5, hits=music, text=Listening to music can stimulate the brain and improve memory, mood, and cognitive function.
+QUERY=can a five years old make music
+        weight=2, docid=3, hits=five music, text=Wolfgang Amadeus Mozart composed his first piece of music at the age of five.
+        weight=2, docid=10, hits=five music, text=A team of five people can form a band and create music as a quintet.
+QUERY=is there music about animals
+        weight=1, docid=3, hits=music, text=Wolfgang Amadeus Mozart composed his first piece of music at the age of five.
+        weight=1, docid=5, hits=music, text=Listening to music can stimulate the brain and improve memory, mood, and cognitive function.
+        
