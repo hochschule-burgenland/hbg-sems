@@ -73,14 +73,12 @@ wn= WordNetLemmatizer()
 def get_lemma(entry:tuple[str,str]) -> str:
     pos= entry[1]
     pos1=None
-    if pos.startswith("J"):
+    if pos.startswith("J") or pos.startswith("R"):
         pos1="a"
     elif pos.startswith("N"):
         pos1="n"
     elif pos.startswith("V"):
         pos1="v"
-    elif pos.startswith("R"):
-        pos1="r"   
     return wn.lemmatize(entry[0],pos1) if pos1 else entry[0]
     
 def initialize_data(documents:list[Document], questions:list[dict]) -> None:
@@ -103,7 +101,7 @@ def initialize_data(documents:list[Document], questions:list[dict]) -> None:
     question_lines =[
     "question;doc;method",
     "what are very old songs;1;keyword-search",
-    "what was the first vocal ever sung;1;synonyms",
+    "what was the oldest vocal ever sung;1;synonyms",
     "can animals make music;9;meronyms",
     "what was the first song;1;word-vector-search",
     "can music bring me back to an active life;8;passage-retrieval",
