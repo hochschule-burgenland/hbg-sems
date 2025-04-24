@@ -93,7 +93,8 @@ class QueryProcessor:
     def query(self,query:str) -> list[QueryResult]:    
         tokens= extract_normalized_tokens(query)
         tokens= QueryProcessor.expand_query_tokens(tokens)
-        tokens.extend(QueryProcessor.find_similar_tokens(query))
+        tokens=set(tokens)
+        tokens.update(QueryProcessor.find_similar_tokens(query))
         result=[]
         for token in tokens:
             docs= index.find_token(token)            
