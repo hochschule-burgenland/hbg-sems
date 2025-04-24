@@ -7608,11 +7608,16 @@ Wir werden die Schlüsselwortsuche in der Folge immer wieder für den Vergleich 
 verwenden.</p>
 <p>Die Schlüsselwortsuche soll zu jeder Frage in dem o.a. Beispiel die passenden Dokumente finden (bis zu 3).
 Der unvollständige Python-Code für diese Aufgabe ist im Sourcefile <code>lab1/search_engine.py</code> zu finden.</p>
-<p>Vervollständigen sie diesen Code, um folgende Funktionalitäten zu erhalten:</p>
+<ul>
+<li><p>Vervollständigen sie diesen Code, um folgende Funktionalitäten zu erhalten:</p>
 <ul>
 <li>Stoppwörter und Satzzeichen werden nicht berücksichtigt</li>
 <li>Groß- und Kleinschreibung soll egal sein</li>
 <li>Nicht Wörter werden gesucht, sondern die Lemmata der Wörter</li>
+</ul>
+</li>
+<li><p>Berechnen als einfache Metrik, wieviel % der Queries das korrekte Dokument als erste Antwort erhalten</p>
+</li>
 </ul>
 </div>
 </div>
@@ -7930,6 +7935,7 @@ lemmatize(self, word: str, pos: str = 'n') -&gt; str
 <h2 id="Aufgabe-2:-Query-Expansion-durch-Synonyme">Aufgabe 2: Query Expansion durch Synonyme<a class="anchor-link" href="#Aufgabe-2:-Query-Expansion-durch-Synonyme">¶</a></h2><ul>
 <li>Verbessern sie die Funktionalität der Suche durch Query Expansion: Jedes Token der Abfrage wird um seine Synonyme erweitert,
 sodass die Suche nach allen Token der Query und allen Synonymen dieser Token erfolgt.</li>
+<li>Berechnen als einfache Metrik, wieviel % der Queries das korrekte Dokument als erste Antwort erhalten</li>
 </ul>
 <p>NLTK enthält ein API um die Synonyme eines Wortes zu bestimmen:</p>
 </div>
@@ -7977,14 +7983,57 @@ synonyms(word, lang='eng') method of nltk.corpus.reader.wordnet.WordNetCorpusRea
 <h2 id="Aufgabe-3:-Query-Expansion-mit-word2vect">Aufgabe 3: Query Expansion mit word2vect<a class="anchor-link" href="#Aufgabe-3:-Query-Expansion-mit-word2vect">¶</a></h2><p>Ergänzen Sie die Suche durch Ähnlichkeitssuche: ein erster Ansatz dazu ist die Erweiterung der Suchbegriffe durch verwandte Begriffe.
 Die Idee dahinter ist, dass die Benutzerin auch diese Begriffe im weiteren Sinne mitgemeint - oder eigentlich gemeint -  haben könnte.
 Dazu verwenden wir das Wort-Einbettungsmodell word2vect, um "verwandte" Begriffe zu gewinnen, nach denen wir dann suchen können.</p>
-<p>Ergänzen sie die Suche durch Query Expansion, aber diesmal sollen nur die Hauptwörter um 5 Begriffe erweitert werden, die ihnen am ähnlichsten sind.
-Verwenden sie für diese Funktionalität das gensim-API für <code>KeyedVectors</code>: <a href="https://radimrehurek.com/gensim/models/keyedvectors.html">https://radimrehurek.com/gensim/models/keyedvectors.html</a></p>
+<ul>
+<li>Ergänzen sie die Suche durch Query Expansion, aber diesmal sollen nur die Hauptwörter um 5 Begriffe erweitert werden, die ihnen am ähnlichsten sind.
+Verwenden sie für diese Funktionalität das gensim-API für <code>KeyedVectors</code>: <a href="https://radimrehurek.com/gensim/models/keyedvectors.html">https://radimrehurek.com/gensim/models/keyedvectors.html</a></li>
+</ul>
 <p>Das Modell liegt im Projektverzeichnis und kann durch folgenden Code geladen werden:</p>
 <pre><code>from gensim.models import KeyedVectors
 project_dir=....
 model = model=KeyedVectors.load(f"{project_dir}/model_cache/enwiki_20180420_100d.bin")
 </code></pre>
-<h2 id="Aufgabe-4:-Passage-Retrieval-mit-Sentence-BERT">Aufgabe 4: Passage Retrieval mit Sentence BERT<a class="anchor-link" href="#Aufgabe-4:-Passage-Retrieval-mit-Sentence-BERT">¶</a></h2><h2 id="Aufgabe-5:-Re-Ranking">Aufgabe 5: Re-Ranking<a class="anchor-link" href="#Aufgabe-5:-Re-Ranking">¶</a></h2><h2 id="Aufgabe-6:-Semantic-Text-Similarity">Aufgabe 6: Semantic Text Similarity<a class="anchor-link" href="#Aufgabe-6:-Semantic-Text-Similarity">¶</a></h2><h2 id="Aufgabe-7:-Pseudo-Relevance-Feedback">Aufgabe 7: Pseudo Relevance Feedback<a class="anchor-link" href="#Aufgabe-7:-Pseudo-Relevance-Feedback">¶</a></h2>
+<ul>
+<li>Berechnen als einfache Metrik, wieviel % der Queries das korrekte Dokument als erste Antwort erhalten</li>
+</ul>
+<h2 id="Aufgabe-4:-Passage-Retrieval-mit-Sentence-BERT">Aufgabe 4: Passage Retrieval mit Sentence BERT<a class="anchor-link" href="#Aufgabe-4:-Passage-Retrieval-mit-Sentence-BERT">¶</a></h2><ul>
+<li>Implementieren sie eine Vektorsuche (Passage Retrieval) für die angegebenen Dokumente und Abfragen. Dabei können Sie ein ganz neues Source-File
+erstellen, weil der bisherige Code großteils keine Rolle mehr spielt.<ul>
+<li>Verwenden Sie dafür das Semantic-Search-API der Sentence Transformer Library (<a href="https://sbert.net/examples/sentence_transformer/applications/semantic-search/README.html#optimized-implementation">https://sbert.net/examples/sentence_transformer/applications/semantic-search/README.html#optimized-implementation</a>)</li>
+<li>Verwenden Sie das Modell "sentence-transformers/all-mpnet-base-v2", das durch das Script <code>setup.py</code> heruntergeladen wurde:</li>
+</ul>
+<pre><code> model = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
+</code></pre>
+</li>
+<li>Berechnen als einfache Metrik, wieviel % der Queries das korrekte Dokument als erste Antwort erhalten</li>
+</ul>
+<h2 id="Aufgabe-5:-Re-Ranking">Aufgabe 5: Re-Ranking<a class="anchor-link" href="#Aufgabe-5:-Re-Ranking">¶</a></h2><ul>
+<li>Implementieren sie eine Vektorsuche durch den direkten Vergleich einer Query mit allen vorkommenden Dokumenten (Cross Encoder).</li>
+<li>Nutzen Sie dazu das Modell "sentence-transformers/all-mpnet-base-v2", das durch das Script <code>setup.py</code> heruntergeladen wurde<pre><code>model = SentenceTransformer("sentence-transformers/msmarco-bert-base-dot-v5")
+</code></pre>
+</li>
+<li>Dokumentation der Vorgehensweise hier: <a href="https://www.sbert.net/docs/quickstart.html#cross-encoder">https://www.sbert.net/docs/quickstart.html#cross-encoder</a></li>
+<li>Berechnen als einfache Metrik, wieviel % der Queries das korrekte Dokument als erste Antwort erhalten</li>
+</ul>
+<h2 id="Aufgabe-6:-Pseudo-Relevance-Feedback">Aufgabe 6: Pseudo Relevance Feedback<a class="anchor-link" href="#Aufgabe-6:-Pseudo-Relevance-Feedback">¶</a></h2><p>Gegeben seien folgende Sätze und eine Abfrage:</p>
+<pre><code>documents= [
+    "It's considerably warmer than the mediterranean climate",   
+    "In summer, it gets quite hot, and that's also due to the exhaust fumes",
+    "The level of harmful emissions is alarming",
+    "Industry spews a lot of acidic sulfur into the air",
+    "the temperature there is quite high"
+]
+questions=["is it warm"]
+</code></pre>
+<p>Beim Pseudo-Relevance Feedback geht man in zwei Phasen vor:</p>
+<ol>
+<li>die erste Suche ist ein Passage Retrieval</li>
+<li>nun werden der Ergebnisse als Vektoren encodiert, und von diesen wird der Durchschnittsvektor gebildet</li>
+<li>die zweite Suche ist ein Passage Retrieval, wobei nach dem Durchschnittsvektor gesucht wird</li>
+<li>das Ergebnis der zweiten Suche ist das Gesamtergebnis</li>
+</ol>
+<ul>
+<li>Implementieren sie Pseudo-Feedback mit den o.a. Beispielen</li>
+</ul>
 </div>
 </div>
 </div>
