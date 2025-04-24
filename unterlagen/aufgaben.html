@@ -7968,23 +7968,23 @@ synonyms(word, lang='eng') method of nltk.corpus.reader.wordnet.WordNetCorpusRea
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=73ca4b39">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-</div>
-</div>
-</div>
-</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=747a6eec">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Aufgabe-3:-Query-Expansion-mit-word2vec,-BERT">Aufgabe 3: Query Expansion mit word2vec, BERT<a class="anchor-link" href="#Aufgabe-3:-Query-Expansion-mit-word2vec,-BERT">¶</a></h2><h2 id="Aufgabe-4:-Passage-Retrieval-mit-Sentence-BERT">Aufgabe 4: Passage Retrieval mit Sentence BERT<a class="anchor-link" href="#Aufgabe-4:-Passage-Retrieval-mit-Sentence-BERT">¶</a></h2><h2 id="Aufgabe-5:-Re-Ranking">Aufgabe 5: Re-Ranking<a class="anchor-link" href="#Aufgabe-5:-Re-Ranking">¶</a></h2><h2 id="Aufgabe-6:-Semantic-Text-Similarity">Aufgabe 6: Semantic Text Similarity<a class="anchor-link" href="#Aufgabe-6:-Semantic-Text-Similarity">¶</a></h2><h2 id="Aufgabe-7:-Pseudo-Relevance-Feedback">Aufgabe 7: Pseudo Relevance Feedback<a class="anchor-link" href="#Aufgabe-7:-Pseudo-Relevance-Feedback">¶</a></h2>
+<h2 id="Aufgabe-3:-Query-Expansion-mit-word2vect">Aufgabe 3: Query Expansion mit word2vect<a class="anchor-link" href="#Aufgabe-3:-Query-Expansion-mit-word2vect">¶</a></h2><p>Ergänzen Sie die Suche durch Ähnlichkeitssuche: ein erster Ansatz dazu ist die Erweiterung der Suchbegriffe durch verwandte Begriffe.
+Die Idee dahinter ist, dass die Benutzerin auch diese Begriffe im weiteren Sinne mitgemeint - oder eigentlich gemeint -  haben könnte.
+Dazu verwenden wir das Wort-Einbettungsmodell word2vect, um "verwandte" Begriffe zu gewinnen, nach denen wir dann suchen können.</p>
+<p>Ergänzen sie die Suche durch Query Expansion, aber diesmal sollen nur die Hauptwörter um 5 Begriffe erweitert werden, die ihnen am ähnlichsten sind.
+Verwenden sie für diese Funktionalität das gensim-API für <code>KeyedVectors</code>: <a href="https://radimrehurek.com/gensim/models/keyedvectors.html">https://radimrehurek.com/gensim/models/keyedvectors.html</a></p>
+<p>Das Modell liegt im Projektverzeichnis und kann durch folgenden Code geladen werden:</p>
+<pre><code>from gensim.models import KeyedVectors
+project_dir=....
+model = model=KeyedVectors.load(f"{project_dir}/model_cache/enwiki_20180420_100d.bin")
+</code></pre>
+<h2 id="Aufgabe-4:-Passage-Retrieval-mit-Sentence-BERT">Aufgabe 4: Passage Retrieval mit Sentence BERT<a class="anchor-link" href="#Aufgabe-4:-Passage-Retrieval-mit-Sentence-BERT">¶</a></h2><h2 id="Aufgabe-5:-Re-Ranking">Aufgabe 5: Re-Ranking<a class="anchor-link" href="#Aufgabe-5:-Re-Ranking">¶</a></h2><h2 id="Aufgabe-6:-Semantic-Text-Similarity">Aufgabe 6: Semantic Text Similarity<a class="anchor-link" href="#Aufgabe-6:-Semantic-Text-Similarity">¶</a></h2><h2 id="Aufgabe-7:-Pseudo-Relevance-Feedback">Aufgabe 7: Pseudo Relevance Feedback<a class="anchor-link" href="#Aufgabe-7:-Pseudo-Relevance-Feedback">¶</a></h2>
 </div>
 </div>
 </div>
