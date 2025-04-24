@@ -36,14 +36,30 @@ class DocumentIndex:
         result= [doc for doc in self.index if token in doc.normalized_tokens]        
         return result
 
+
+from nltk.corpus import wordnet
+from gensim.models import KeyedVectors
 class QueryProcessor:
+
+    project_dir="."
+    model = model=KeyedVectors.load(f"{project_dir}/model_cache/enwiki_20180420_100d.bin")
 
     def __init__(self, index:DocumentIndex):
         self.index=index
 
+    @staticmethod
+    def expand_query_tokens(q_tokens:list[str]) -> list[str]:
+        result= set()
+        for token in q_tokens:
+            synsets= wordnet.synonyms(token)
+            for syn in synsets:
+                result.update([w.lower() for w in syn])
+            result.add(token)       
+        return result
+
     def query(self,query:str) -> list[QueryResult]:    
         tokens= extract_normalized_tokens(query)
-        tokens= expand_query_tokens(tokens)
+        tokens= QueryProcessor.expand_query_tokens(tokens)
         result=[]
         for token in tokens:
             docs= index.find_token(token)            
@@ -68,18 +84,6 @@ def extract_normalized_tokens(text:str) -> list[str]:
     postok= nltk.pos_tag(tok)
     tok= [get_lemma(e) for e in postok]
     return tok
-
-from nltk.corpus import wordnet
-
-def expand_query_tokens(query:list[str]) -> list[str]:
-    result= set()
-    for token in query:
-        synsets= wordnet.synonyms(token)
-        for syn in synsets:
-            result.update([w.lower() for w in syn])
-        result.add(token)    
-    return result
-
 
 from nltk.stem import WordNetLemmatizer 
 wn= WordNetLemmatizer()
