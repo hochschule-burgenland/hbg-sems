@@ -68,7 +68,7 @@ class QueryProcessor:
             for syn in synsets:
                 result.update([w.lower() for w in syn])                           
             result.add(token)               
-        return result
+        return list(result)
 
     @staticmethod
     def is_comparable(token:str) -> bool:
@@ -82,9 +82,11 @@ class QueryProcessor:
     def find_similar_tokens(query:list[str]) -> list[str]:
         tokens= extract_relevant_tokens(query)
         result=[]
-        for t in tokens:
-            simset= QueryProcessor.model.most_similar(positive=t,topn=5)
-            result.extend(s[0] for s in simset if QueryProcessor.is_comparable(s[0]))
+        for t in (t for t in tokens if QueryProcessor.is_comparable(t)):
+            _s= QueryProcessor.model.most_similar(positive=t,topn=5)
+            simset=[s[0] for s in _s]
+            lemmas= lemmatize_tokens(simset)
+            result.extend(lemmas)
         LOG.debug(f"similar tokens found: {result}")
         return result
 
@@ -112,8 +114,10 @@ def extract_relevant_tokens(text:str) -> list[str]:
     return [w.lower() for w in tok if (w not in STOPWORDS and w not in PUNCTUATIONS)]
     
 def lemmatize_tokens(tokens:list[str]) -> list[str]:
+    postags=[]
     for token in tokens:
-        postags= nltk.pos_tag(token)
+        p=nltk.pos_tag([token])
+        postags.append(p[0])
     result= [get_lemma(e) for e in postags]
     return result
 
