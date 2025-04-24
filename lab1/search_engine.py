@@ -1,3 +1,17 @@
+import sys   
+import logging
+import nltk
+from nltk.stem import WordNetLemmatizer 
+from nltk.corpus import wordnet
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from gensim.models import KeyedVectors
+
+WN= WordNetLemmatizer()
+LOG= logging.getLogger(__name__)
+STOPWORDS= stopwords.words("english")
+PUNCTUATIONS=",.:!?-"
+
 class Document:
 
     def __init__(self, id:int, title:str, text:str):
@@ -37,9 +51,12 @@ class DocumentIndex:
         return result
 
 
-from nltk.corpus import wordnet
+
 class QueryProcessor:
-    
+
+    project_dir="."
+    model = model=KeyedVectors.load(f"{project_dir}/model_cache/enwiki_20180420_100d.bin")
+
     def __init__(self, index:DocumentIndex):
         self.index=index
 
@@ -49,13 +66,32 @@ class QueryProcessor:
         for token in q_tokens:
             synsets= wordnet.synonyms(token)
             for syn in synsets:
-                result.update([w.lower() for w in syn])
-            result.add(token)       
+                result.update([w.lower() for w in syn])                           
+            result.add(token)               
+        return result
+
+    @staticmethod
+    def is_comparable(token:str) -> bool:
+        tags= nltk.pos_tag([token])
+        if tags:
+            tag=tags[0][1]
+            return tag.startswith("N") or tag.startswith("R") or tag.startswith("J")
+        return False
+
+    @staticmethod
+    def find_similar_tokens(query:list[str]) -> list[str]:
+        tokens= extract_relevant_tokens(query)
+        result=[]
+        for t in tokens:
+            simset= QueryProcessor.model.most_similar(positive=t,topn=5)
+            result.extend(s[0] for s in simset if QueryProcessor.is_comparable(s[0]))
+        LOG.debug(f"similar tokens found: {result}")
         return result
 
     def query(self,query:str) -> list[QueryResult]:    
         tokens= extract_normalized_tokens(query)
         tokens= QueryProcessor.expand_query_tokens(tokens)
+        tokens.extend(QueryProcessor.find_similar_tokens(query))
         result=[]
         for token in tokens:
             docs= index.find_token(token)            
@@ -67,22 +103,19 @@ class QueryProcessor:
                     result.append(QueryResult(doc,token))    
         return sorted(result, key=lambda qr: qr.weight, reverse=True)        
 
-def extract_normalized_tokens(text:str) -> list[str]:
-    from nltk.corpus import stopwords
-    from nltk.tokenize import word_tokenize
-    import nltk    
+def extract_normalized_tokens(text:str) -> list[str]:    
+    tokens= extract_relevant_tokens(text)
+    return lemmatize_tokens(tokens)
 
-    stops= stopwords.words("english")
-    puncts=",.:!?-"
+def extract_relevant_tokens(text:str) -> list[str]:
     tok= word_tokenize(text)
-    tok= [w.lower() for w in tok if (w not in stops and w not in puncts)]
-  
-    postok= nltk.pos_tag(tok)
-    tok= [get_lemma(e) for e in postok]
-    return tok
-
-from nltk.stem import WordNetLemmatizer 
-wn= WordNetLemmatizer()
+    return [w.lower() for w in tok if (w not in STOPWORDS and w not in PUNCTUATIONS)]
+    
+def lemmatize_tokens(tokens:list[str]) -> list[str]:
+    for token in tokens:
+        postags= nltk.pos_tag(token)
+    result= [get_lemma(e) for e in postags]
+    return result
 
 def get_lemma(entry:tuple[str,str]) -> str:
     pos= entry[1]
@@ -93,7 +126,7 @@ def get_lemma(entry:tuple[str,str]) -> str:
         pos1="n"
     elif pos.startswith("V"):
         pos1="v"
-    return wn.lemmatize(entry[0],pos1) if pos1 else entry[0]
+    return WN.lemmatize(entry[0],pos1) if pos1 else entry[0]
 
 def initialize_data(documents:list[Document], questions:list[dict]) -> None:
     from csv import DictReader
@@ -117,7 +150,7 @@ def initialize_data(documents:list[Document], questions:list[dict]) -> None:
     "what are very old songs;1;keyword-search",
     "what was the oldest vocal ever sung;1;synonyms",
     "can animals make music;9;meronyms",
-    "what was the first song;1;word-vector-search",
+    "what is the earliest song;1;word-vector-search",
     "can music bring me back to an active life;8;passage-retrieval",
     "can a five years old make music;3;passage-retrieval",
     "is there music about animals;4;passage-retrieval",    
@@ -125,6 +158,9 @@ def initialize_data(documents:list[Document], questions:list[dict]) -> None:
     questions.extend(list(DictReader(question_lines, delimiter=';', skipinitialspace=True)))
    
 if __name__ == "__main__":
+
+    logging.basicConfig(stream=sys.stdout)
+    LOG.setLevel(logging.DEBUG)
 
     documents=[]
     queries=[]
