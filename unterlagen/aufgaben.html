@@ -7606,10 +7606,13 @@ read 6 questions
 <h2 id="Aufgabe-1:-Keyword-Search">Aufgabe 1: Keyword Search<a class="anchor-link" href="#Aufgabe-1:-Keyword-Search">¶</a></h2><p>Für die Schlüsselwortsuche ist Stopword Removal, Lowercasing und Lemmatization essentiell.
 Wir werden die Schlüsselwortsuche in der Folge immer wieder für den Vergleich mit anderen Methoden
 verwenden.</p>
-<h4 id="API:-Tokenisierung-(Zergliederung-eines-Textes-in-W%C3%B6rter)">API: Tokenisierung (Zergliederung eines Textes in Wörter)<a class="anchor-link" href="#API:-Tokenisierung-(Zergliederung-eines-Textes-in-W%C3%B6rter)">¶</a></h4><ul>
-<li>Synonyme eines Wortes ermitteln</li>
-<li>POS-Tag eines Wortes ermitteln</li>
-<li>Lemma eins Wortes bilden</li>
+<p>Die Schlüsselwortsuche soll zu jeder Frage in dem o.a. Beispiel die passenden Dokumente finden (bis zu 3).
+Der unvollständige Python-Code für diese Aufgabe ist im Sourcefile <code>lab1/search_engine.py</code> zu finden.</p>
+<p>Vervollständigen sie diesen Code, um folgende Funktionalitäten zu erhalten:</p>
+<ul>
+<li>Stoppwörter und Satzzeichen werden nicht berücksichtigt</li>
+<li>Groß- und Kleinschreibung soll egal sein</li>
+<li>Nicht Wörter werden gesucht, sondern die Lemmata der Wörter</li>
 </ul>
 </div>
 </div>
@@ -7924,7 +7927,64 @@ lemmatize(self, word: str, pos: str = 'n') -&gt; str
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Aufgabe-2:-Query-Expansion-mit-NLTK">Aufgabe 2: Query Expansion mit NLTK<a class="anchor-link" href="#Aufgabe-2:-Query-Expansion-mit-NLTK">¶</a></h2><h2 id="Aufgabe-3:-Query-Expansion-mit-word2vec,-BERT">Aufgabe 3: Query Expansion mit word2vec, BERT<a class="anchor-link" href="#Aufgabe-3:-Query-Expansion-mit-word2vec,-BERT">¶</a></h2><h2 id="Aufgabe-4:-Passage-Retrieval-mit-Sentence-BERT">Aufgabe 4: Passage Retrieval mit Sentence BERT<a class="anchor-link" href="#Aufgabe-4:-Passage-Retrieval-mit-Sentence-BERT">¶</a></h2><h2 id="Aufgabe-5:-Re-Ranking">Aufgabe 5: Re-Ranking<a class="anchor-link" href="#Aufgabe-5:-Re-Ranking">¶</a></h2><h2 id="Aufgabe-6:-Semantic-Text-Similarity">Aufgabe 6: Semantic Text Similarity<a class="anchor-link" href="#Aufgabe-6:-Semantic-Text-Similarity">¶</a></h2><h2 id="Aufgabe-7:-Pseudo-Relevance-Feedback">Aufgabe 7: Pseudo Relevance Feedback<a class="anchor-link" href="#Aufgabe-7:-Pseudo-Relevance-Feedback">¶</a></h2>
+<h2 id="Aufgabe-2:-Query-Expansion-durch-Synonyme">Aufgabe 2: Query Expansion durch Synonyme<a class="anchor-link" href="#Aufgabe-2:-Query-Expansion-durch-Synonyme">¶</a></h2><ul>
+<li>Verbessern sie die Funktionalität der Suche durch Query Expansion: Jedes Token der Abfrage wird um seine Synonyme erweitert,
+sodass die Suche nach allen Token der Query und allen Synonymen dieser Token erfolgt.</li>
+</ul>
+<p>NLTK enthält ein API um die Synonyme eines Wortes zu bestimmen:</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ff17b5b0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nltk.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">wordnet</span>
+<span class="n">help</span><span class="p">(</span><span class="n">wordnet</span><span class="o">.</span><span class="n">synonyms</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Help on method synonyms in module nltk.corpus.reader.wordnet:
+
+synonyms(word, lang='eng') method of nltk.corpus.reader.wordnet.WordNetCorpusReader instance
+    return nested list with the synonyms of the different senses of word in the given language
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=747a6eec">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Aufgabe-3:-Query-Expansion-mit-word2vect">Aufgabe 3: Query Expansion mit word2vect<a class="anchor-link" href="#Aufgabe-3:-Query-Expansion-mit-word2vect">¶</a></h2><p>Ergänzen Sie die Suche durch Ähnlichkeitssuche: ein erster Ansatz dazu ist die Erweiterung der Suchbegriffe durch verwandte Begriffe.
+Die Idee dahinter ist, dass die Benutzerin auch diese Begriffe im weiteren Sinne mitgemeint - oder eigentlich gemeint -  haben könnte.
+Dazu verwenden wir das Wort-Einbettungsmodell word2vect, um "verwandte" Begriffe zu gewinnen, nach denen wir dann suchen können.</p>
+<p>Ergänzen sie die Suche durch Query Expansion, aber diesmal sollen nur die Hauptwörter um 5 Begriffe erweitert werden, die ihnen am ähnlichsten sind.
+Verwenden sie für diese Funktionalität das gensim-API für <code>KeyedVectors</code>: <a href="https://radimrehurek.com/gensim/models/keyedvectors.html">https://radimrehurek.com/gensim/models/keyedvectors.html</a></p>
+<p>Das Modell liegt im Projektverzeichnis und kann durch folgenden Code geladen werden:</p>
+<pre><code>from gensim.models import KeyedVectors
+project_dir=....
+model = model=KeyedVectors.load(f"{project_dir}/model_cache/enwiki_20180420_100d.bin")
+</code></pre>
+<h2 id="Aufgabe-4:-Passage-Retrieval-mit-Sentence-BERT">Aufgabe 4: Passage Retrieval mit Sentence BERT<a class="anchor-link" href="#Aufgabe-4:-Passage-Retrieval-mit-Sentence-BERT">¶</a></h2><h2 id="Aufgabe-5:-Re-Ranking">Aufgabe 5: Re-Ranking<a class="anchor-link" href="#Aufgabe-5:-Re-Ranking">¶</a></h2><h2 id="Aufgabe-6:-Semantic-Text-Similarity">Aufgabe 6: Semantic Text Similarity<a class="anchor-link" href="#Aufgabe-6:-Semantic-Text-Similarity">¶</a></h2><h2 id="Aufgabe-7:-Pseudo-Relevance-Feedback">Aufgabe 7: Pseudo Relevance Feedback<a class="anchor-link" href="#Aufgabe-7:-Pseudo-Relevance-Feedback">¶</a></h2>
 </div>
 </div>
 </div>
