@@ -117,7 +117,7 @@ def initialize_data(documents:list[Document], questions:list[dict]) -> None:
     "what are very old songs;1;keyword-search",
     "what was the oldest vocal ever sung;1;synonyms",
     "can animals make music;9;meronyms",
-    "what was the first song;1;word-vector-search",
+    "what was the earliest song;1;word-vector-search",
     "can music bring me back to an active life;8;passage-retrieval",
     "can a five years old make music;3;passage-retrieval",
     "is there music about animals;4;passage-retrieval",    
